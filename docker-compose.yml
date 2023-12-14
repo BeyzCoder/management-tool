@@ -1,0 +1,9 @@
+version: '3.8'
+
+services:
+  basic-dashboard:
+    build: ./basic-dashboard
+    volumes:
+      - E:\Documents\Project\fcc-project\basic-dashboard:/spring-boot-app
+    ports:
+      - "8080:8080"

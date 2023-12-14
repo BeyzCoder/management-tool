@@ -1,0 +1,13 @@
+Wed, Dec 13:
+[x] - Create a Java Spring Boot application package and make it into
+    a docker container that can run the application. Then reload the 
+    container if there are any changes.
+
+[x] - Wrote a README.md file explaining what is this project all about
+    and what are the langauges, technologies, and tools that I'm going to use
+    on this project.
+
+[x] - Implement a basic working GET and POST method. This stage does not have
+    a working database, so for now will use a dummy array for storing data.
+
+[ ] - Initialize this project to a git repository.
