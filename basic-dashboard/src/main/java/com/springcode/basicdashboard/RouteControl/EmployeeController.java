@@ -1,4 +1,4 @@
-package com.springcode.basicdashboard.controllers;
+package com.springcode.basicdashboard.RouteControl;
 
 import java.util.List;
 
@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.springcode.basicdashboard.AccountServices;
-import com.springcode.basicdashboard.tasks.Task;
+import com.springcode.basicdashboard.Models.Task;
 
 @RestController
 @RequestMapping(path="dashboard/employee")
@@ -22,13 +22,13 @@ public class EmployeeController {
         this.accountServices = accountServices;
     }
 
-    @GetMapping("/{id}")
-    public List<Task> getTasks(@PathVariable int id) {
-        return this.accountServices.getEmployeeTasks(id);
-    }
+    // @GetMapping("/{id}")
+    // public List<Task> getTasks(@PathVariable int id) {
+    //     return this.accountServices.getEmployeeTasks(id);
+    // }
 
-    @PostMapping("/{id}")
-    public void entryNewTask(@PathVariable int id, @RequestBody Task task) {
-        this.accountServices.addTask(task, id);
-    }
+    // @PostMapping("/{id}")
+    // public void entryNewTask(@PathVariable int id, @RequestBody Task task) {
+    //     this.accountServices.addTask(task, id);
+    // }
 }

@@ -7,3 +7,16 @@ services:
       - E:\Documents\Project\fcc-project\basic-dashboard:/spring-boot-app
     ports:
       - "8080:8080"
+    depends_on:
+      - postgres
+
+  postgres:
+    image: postgres:latest
+    container_name: accounts-db
+    environment:
+      POSTGRES_DB: AccountInformationDB
+      POSTGRES_USER: testdev
+      POSTGRES_PASSWORD: test123
+    ports:
+      - "5432:5432"
+    restart: always

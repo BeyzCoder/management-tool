@@ -1,10 +1,10 @@
-package com.springcode.basicdashboard.controllers;
+package com.springcode.basicdashboard.RouteControl;
 
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.springcode.basicdashboard.AccountServices;
-import com.springcode.basicdashboard.accounts.Employee;
+import com.springcode.basicdashboard.Models.Employee;
 
 import java.util.List;
 
@@ -24,14 +24,14 @@ public class AdminController {
         this.accountServices = accountServices;
     }
 
-    @GetMapping("/{id}")
-    public List<Employee> getEmployees(@PathVariable int id) {
-        return this.accountServices.getAdminsEmployees(id);
+    @GetMapping("/")
+    public List<Employee> getEmployees() {
+        return this.accountServices.getAdminEmployees();
     }
     
-    @PostMapping("/{id}")
-    public void registerNewEmployee(@PathVariable int id, @RequestBody Employee employee) {
-        this.accountServices.addEmployee(employee, id);
-    }
+    // @PostMapping("/{id}")
+    // public void registerNewEmployee(@PathVariable int id, @RequestBody Employee employee) {
+    //     this.accountServices.addEmployee(employee, id);
+    // }
     
 }

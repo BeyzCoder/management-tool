@@ -1,4 +1,4 @@
-Wed, Dec 13:
+Wednesday, December 13:
 [x] - Create a Java Spring Boot application package and make it into
     a docker container that can run the application. Then reload the 
     container if there are any changes.
@@ -10,4 +10,11 @@ Wed, Dec 13:
 [x] - Implement a basic working GET and POST method. This stage does not have
     a working database, so for now will use a dummy array for storing data.
 
-[ ] - Initialize this project to a git repository.
+[x] - Initialize this project to a git repository.
+
+Thursday, December 14:
+[x] - Create a Postgres database container and Entity for the database.
+
+[x] - Rename folder and files.
+
+[x] - Made a connection to the database and able to add to the Admin table.
