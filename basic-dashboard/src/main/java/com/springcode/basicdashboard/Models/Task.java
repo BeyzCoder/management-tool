@@ -2,54 +2,72 @@ package com.springcode.basicdashboard.Models;
 
 import java.time.LocalDate;
 
+import jakarta.persistence.CascadeType;
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.Table;
 
 @Entity
+@Table
 public class Task {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id; 
+    @Column(name = "task_id")
+    private Long taskId;
 
-    private LocalDate deadline;
-    private String title;
-    private String desciption;
+    @Column(name = "task_desp", nullable = false)
+    private String taskDescription;
 
-    @ManyToOne
-    @JoinColumn(name = "employee_id")
-    private Employee taskEmployee;
-    
-    public Task(LocalDate deadline, String title, String description) {
-        this.deadline = deadline;
-        this.title = title;
-        this.desciption = description;
+    @Column(name = "task_date", nullable = false)
+    private LocalDate taskCreateDate;
+
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "employee_id", referencedColumnName = "emp_id")
+    private Employee employee;
+
+    public Task() {
     }
 
-    public LocalDate getDeadline() {
-        return deadline;
+    public Task(String taskDescription, LocalDate taskCreateDate) {
+        this.taskDescription = taskDescription;
+        this.taskCreateDate = taskCreateDate;
     }
 
-    public void setDeadline(LocalDate deadline) {
-        this.deadline = deadline;
+    public Long getTaskId() {
+        return taskId;
     }
 
-    public String getTitle() {
-        return title;
+    public void setTaskId(Long taskId) {
+        this.taskId = taskId;
     }
 
-    public void setTitle(String title) {
-        this.title = title;
+    public String getTaskDescription() {
+        return taskDescription;
     }
 
-    public String getDesciption() {
-        return desciption;
+    public void setTaskDescription(String taskDescription) {
+        this.taskDescription = taskDescription;
     }
 
-    public void setDesciption(String desciption) {
-        this.desciption = desciption;
+    public LocalDate getTaskCreateDate() {
+        return taskCreateDate;
+    }
+
+    public void setTaskCreateDate(LocalDate taskCreateDate) {
+        this.taskCreateDate = taskCreateDate;
+    }
+
+    public Employee getEmployee() {
+        return employee;
+    }
+
+    public void setEmployee(Employee employee) {
+        this.employee = employee;
     }
 }

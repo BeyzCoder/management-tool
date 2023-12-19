@@ -18,3 +18,13 @@ Thursday, December 14:
 [x] - Rename folder and files.
 
 [x] - Made a connection to the database and able to add to the Admin table.
+
+Monday, December 18:
+[x] - Rename the files and folders, Restructure the files, Remove the Admin class and added a new class Department.
+    but planning to add a Manager class.
+
+[x] - Fixed the entity relationship.
+
+[x] - Reconfig the employee attributes and fields.
+
+[x] - Able to add instances to the database that cascade any other object.
