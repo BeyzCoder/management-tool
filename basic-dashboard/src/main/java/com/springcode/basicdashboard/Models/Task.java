@@ -2,7 +2,8 @@ package com.springcode.basicdashboard.Models;
 
 import java.time.LocalDate;
 
-import jakarta.persistence.CascadeType;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -13,61 +14,57 @@ import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 
 @Entity
-@Table
+@Table(name = "tasks")
 public class Task {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "task_id")
-    private Long taskId;
+    @Column(name = "id")
+    private Long id;
 
-    @Column(name = "task_desp", nullable = false)
-    private String taskDescription;
+    @Column(name = "desp", nullable = false)
+    private String description;
 
-    @Column(name = "task_date", nullable = false)
-    private LocalDate taskCreateDate;
+    @Column(name = "date", nullable = false)
+    private LocalDate createDate;
 
-    @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "employee_id", referencedColumnName = "emp_id")
-    private Employee employee;
+    @JsonIgnore
+    @ManyToOne
+    @JoinColumn(name = "employee_id", referencedColumnName = "id")
+    private Employee currentWorker;
 
     public Task() {
     }
 
-    public Task(String taskDescription, LocalDate taskCreateDate) {
-        this.taskDescription = taskDescription;
-        this.taskCreateDate = taskCreateDate;
+    public Long getId() {
+        return id;
     }
 
-    public Long getTaskId() {
-        return taskId;
+    public void setId(Long id) {
+        this.id = id;
     }
 
-    public void setTaskId(Long taskId) {
-        this.taskId = taskId;
+    public String getDescription() {
+        return description;
     }
 
-    public String getTaskDescription() {
-        return taskDescription;
+    public void setDescription(String description) {
+        this.description = description;
     }
 
-    public void setTaskDescription(String taskDescription) {
-        this.taskDescription = taskDescription;
+    public LocalDate getCreateDate() {
+        return createDate;
     }
 
-    public LocalDate getTaskCreateDate() {
-        return taskCreateDate;
+    public void setCreateDate(LocalDate createDate) {
+        this.createDate = createDate;
     }
 
-    public void setTaskCreateDate(LocalDate taskCreateDate) {
-        this.taskCreateDate = taskCreateDate;
+    public Employee getCurrentWorker() {
+        return this.currentWorker;
     }
 
-    public Employee getEmployee() {
-        return employee;
-    }
-
-    public void setEmployee(Employee employee) {
-        this.employee = employee;
+    public void setCurrentWorker(Employee currentWorker) {
+        this.currentWorker = currentWorker;
     }
 }

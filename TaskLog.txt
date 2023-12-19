@@ -28,3 +28,13 @@ Monday, December 18:
 [x] - Reconfig the employee attributes and fields.
 
 [x] - Able to add instances to the database that cascade any other object.
+
+Tuesday, December 19:
+[x] - Made a CRUD for the Employee entity and a create method for Task entity.
+
+Plans for the future
+    - Able to handle exception errors.
+
+[x] - Create a new entity Department that has bi-directional relationship with Employee class.
+
+[x] - Make a TaskRepo and DepartmentRepo and make business logic for the department.
