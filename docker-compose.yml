@@ -19,4 +19,12 @@ services:
       POSTGRES_PASSWORD: test123
     ports:
       - "5432:5432"
+
+  manage-interface:
+    build: ./manage-interface
+    volumes:
+      - "/usr/src/app/node_modules"
+      - E:\Documents\Project\fcc-project\manage-interface:/usr/src/app
+    ports:
+      - "4200:4200"
     restart: always

@@ -38,3 +38,12 @@ Plans for the future
 [x] - Create a new entity Department that has bi-directional relationship with Employee class.
 
 [x] - Make a TaskRepo and DepartmentRepo and make business logic for the department.
+
+Wednesday, December 20:
+[x] - Initialize Angular application folder.
+
+[x] - Dockerize the angular application, then docker-compose it.
+
+[x] - Make a connection between the backend and frontend.
+
+[x] - Create a angular service of Employee.
