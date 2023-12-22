@@ -47,3 +47,10 @@ Wednesday, December 20:
 [x] - Make a connection between the backend and frontend.
 
 [x] - Create a angular service of Employee.
+
+Thursday, December 21:
+[x] - learn how to use bootstrap.
+
+[x] - find a good snippet for our schema.
+
+[x] - Make it able to show it on the angular application.
