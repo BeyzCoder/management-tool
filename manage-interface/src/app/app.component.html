@@ -9,14 +9,14 @@
 </head>
 <body>
   <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-    <a class="navbar-brand" style="color:white;">Employee Manager</a>
+    <a class="navbar-brand" style="color:white;">Employee Management</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor02" aria-controls="navbarColor02" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" id="navbarColor02">
       <ul class="navbar-nav mr-auto">
           <li class="nav-item active">
-            <a class="nav-link" data-toggle="modal" data-target="#exampleModal">Add Employee <span class="sr-only">(current)</span></a>
+            <a class="nav-link" (click)="onOpenModal(null, 'add')">Add Employee <span class="sr-only">(current)</span></a>
           </li>
       </ul>
       <form class="form-inline my-2 my-lg-0">
@@ -24,9 +24,9 @@
       </form>
     </div>
   </nav>
-  <div class="container">
+  <div class="container" id="main-container">
     <div class="row">
-        <div class="col-xl-4 col-md-6">
+        <div *ngFor="let employee of employees" class="col-xl-4 col-md-6">
             <div class="card">
                 <div class="card-block">
                     <div class="row align-items-center justify-content-center">
@@ -34,129 +34,119 @@
                             <img class="img-fluid rounded-circle" style="width:70px;" src="https://bootdey.com/img/Content/avatar/avatar6.png" alt="dashboard-user">
                         </div>
                         <div class="col">
-                            <h5>John Doe</h5>
-                            <span>UX Designer</span>
+                            <h5>{{employee?.name}}</h5>
+                            <span>{{employee?.department?.field}}</span>
                         </div>
+                        <a (click)="onOpenModal(employee, 'edit')" class="btn btn-primary tooltips" data-placement="top" data-original-title="Edit"><i class="fa fa-pencil"></i> </a>
+                        <a (click)="onOpenModal(employee, 'delete')" class="btn btn-secondary tooltips" data-placement="top" data-original-title="Delete"><i class="fa fa-times"></i></a>
                     </div>
                     <ul class="task-list">
-                        <li>
-                            <i class="task-icon bg-c-green"></i>
-                            <h6>Anton Knudsen<span class="float-right text-muted">14 MAY</span></h6>
-                            <p class="text-muted">Lorem ipsum is dolorem…</p>
-                        </li>
-                        <li>
-                            <i class="task-icon bg-c-green"></i>
-                            <h6>Anton Knudsen<span class="float-right text-muted">14 MAY</span></h6>
-                            <p class="text-muted">Lorem ipsum is dolorem…</p>
-                        </li>
-                        <li>
-                            <i class="task-icon bg-c-green"></i>
-                            <h6>Anton Knudsen<span class="float-right text-muted">14 MAY</span></h6>
-                            <p class="text-muted">Lorem ipsum is dolorem…</p>
-                        </li>
+                        <div *ngFor="let task of employee?.tasks">
+                            <li>
+                                <i class="task-icon bg-c-green"></i>
+                                <h6>{{task?.title}}<span class="float-right text-muted">{{task?.createDate}}</span></h6>
+                                <p class="text-muted">{{task?.description}}</p>
+                            </li>
+                        </div>
                     </ul>
                 </div>
             </div>
         </div>
-        <div class="col-xl-4 col-md-6">
-            <div class="card">
-                <div class="card-block">
-                    <div class="row align-items-center justify-content-center">
-                        <div class="col-auto">
-                            <img class="img-fluid rounded-circle" style="width:70px;" src="https://bootdey.com/img/Content/avatar/avatar1.png" alt="dashboard-user">
-                        </div>
-                        <div class="col">
-                            <h5>User Doe</h5>
-                            <span>UX Designer</span>
-                        </div>
-                    </div>
-                    <ul class="task-list">
-                        <li>
-                            <i class="task-icon bg-c-green"></i>
-                            <h6>Anton Knudsen<span class="float-right text-muted">14 MAY</span></h6>
-                            <p class="text-muted">Lorem ipsum is dolorem…</p>
-                        </li>
-                        <li>
-                            <i class="task-icon bg-c-green"></i>
-                            <h6>Anton Knudsen<span class="float-right text-muted">14 MAY</span></h6>
-                            <p class="text-muted">Lorem ipsum is dolorem…</p>
-                        </li>
-                        <li>
-                            <i class="task-icon bg-c-green"></i>
-                            <h6>Anton Knudsen<span class="float-right text-muted">14 MAY</span></h6>
-                            <p class="text-muted">Lorem ipsum is dolorem…</p>
-                        </li>
-                    </ul>
-                </div>
+    </div>
+  </div>
+
+  <div class="modal fade" id="addEmployeeModal" tabindex="-1" role="dialog" aria-labelledby="addEmployeeModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+         <div class="modal-header">
+            <h5 class="modal-title" id="addEmployeeModalLabel">Add Employee</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+            </button>
+         </div>
+         <div class="modal-body">
+            <form #addForm="ngForm" (ngSubmit)="onAddEmployee(addForm)">
+            <div class="form-group">
+               <label for="name">Name</label>
+               <input type="text" ngModel name="name" class="form-control" id="name" placeholder="Name" required>
             </div>
+            <div class="form-group">
+               <label for="email">Email Address</label>
+               <input type="email" ngModel name="email" class="form-control" id="email" placeholder="Email" required>
+            </div>
+            <div class="form-group">
+               <label for="phone">Department</label>
+               <input type="text" ngModel name="department" class="form-control" id="department" placeholder="Department" required>
+            </div>
+            <div class="modal-footer">
+               <button type="button" id="add-employee-form" class="btn btn-secondary" data-dismiss="modal">Close</button>
+               <button [disabled]="addForm.invalid" type="submit" class="btn btn-primary" >Save changes</button>
+            </div>
+            </form>
+         </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal fade" id="updateEmployeeModal" tabindex="-1" role="dialog" aria-labelledby="employeeEditModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+       <div class="modal-content">
+          <div class="modal-header">
+             <h5 class="modal-title" id="updateEmployeeModalLabel">Edit Employee {{editEmployee?.name}}</h5>
+             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+             <span aria-hidden="true">&times;</span>
+             </button>
+          </div>
+          <div class="modal-body">
+             <form #editForm="ngForm">
+                <div class="form-group">
+                   <label for="name">Name</label>
+                   <input type="text" ngModel="{{editEmployee?.name}}" name="name" class="form-control" id="name" aria-describedby="emailHelp" placeholder="Name">
+                </div>
+                <input type="hidden" ngModel="{{editEmployee?.id}}" name="id" class="form-control" id="id" placeholder="Email">
+                <div class="form-group">
+                   <label for="email">Email Address</label>
+                   <input type="email" ngModel="{{editEmployee?.email}}" name="email" class="form-control" id="email" placeholder="Email">
+                </div>
+                <div class="form-group">
+                   <label for="phone">Department Field</label>
+                   <input type="text" ngModel="{{editEmployee?.department}}" name="department" class="form-control" id="department" placeholder="Department">
+                </div>
+                <div class="modal-footer">
+                   <button type="button" id="" data-dismiss="modal" class="btn btn-secondary">Close</button>
+                   <button (click)="onUpdateEmployee(editForm.value)" data-dismiss="modal" class="btn btn-primary" >Save changes</button>
+                </div>
+             </form>
+          </div>
+       </div>
+    </div>
+  </div>
+
+  <div class="modal fade" id="deleteEmployeeModal" tabindex="-1" role="dialog" aria-labelledby="deleteModelLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+            <h5 class="modal-title" id="deleteModelLabel">Delete Employee</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+            </button>
         </div>
-	</div>
-    <div class="row">
-        <div class="col-xl-4 col-md-6">
-            <div class="card">
-                <div class="card-block">
-                    <div class="row align-items-center justify-content-center">
-                        <div class="col-auto">
-                            <img class="img-fluid rounded-circle" style="width:70px;" src="https://bootdey.com/img/Content/avatar/avatar3.png" alt="dashboard-user">
-                        </div>
-                        <div class="col">
-                            <h5>John Doe</h5>
-                            <span>UX Designer</span>
-                        </div>
-                    </div>
-                    <ul class="task-list">
-                        <li>
-                            <i class="task-icon bg-c-green"></i>
-                            <h6>Anton Knudsen<span class="float-right text-muted">14 MAY</span></h6>
-                            <p class="text-muted">Lorem ipsum is dolorem…</p>
-                        </li>
-                        <li>
-                            <i class="task-icon bg-c-green"></i>
-                            <h6>Anton Knudsen<span class="float-right text-muted">14 MAY</span></h6>
-                            <p class="text-muted">Lorem ipsum is dolorem…</p>
-                        </li>
-                        <li>
-                            <i class="task-icon bg-c-green"></i>
-                            <h6>Anton Knudsen<span class="float-right text-muted">14 MAY</span></h6>
-                            <p class="text-muted">Lorem ipsum is dolorem…</p>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-        <div class="col-xl-4 col-md-6">
-            <div class="card">
-                <div class="card-block">
-                    <div class="row align-items-center justify-content-center">
-                        <div class="col-auto">
-                            <img class="img-fluid rounded-circle" style="width:70px;" src="https://bootdey.com/img/Content/avatar/avatar2.png" alt="dashboard-user">
-                        </div>
-                        <div class="col">
-                            <h5>User Doe</h5>
-                            <span>UX Designer</span>
-                        </div>
-                    </div>
-                    <ul class="task-list">
-                        <li>
-                            <i class="task-icon bg-c-green"></i>
-                            <h6>Anton Knudsen<span class="float-right text-muted">14 MAY</span></h6>
-                            <p class="text-muted">Lorem ipsum is dolorem…</p>
-                        </li>
-                        <li>
-                            <i class="task-icon bg-c-green"></i>
-                            <h6>Anton Knudsen<span class="float-right text-muted">14 MAY</span></h6>
-                            <p class="text-muted">Lorem ipsum is dolorem…</p>
-                        </li>
-                        <li>
-                            <i class="task-icon bg-c-green"></i>
-                            <h6>Anton Knudsen<span class="float-right text-muted">14 MAY</span></h6>
-                            <p class="text-muted">Lorem ipsum is dolorem…</p>
-                        </li>
-                    </ul>
-                </div>
-            </div>
+          <div class="modal-body">
+            <p>Are you sure you want to delete employee {{deleteEmployee?.name}}?</p>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">No</button>
+              <button (click)="onDeleteEmployee(deleteEmployee?.id)" class="btn btn-danger" data-dismiss="modal">Yes</button>
+          </div>
         </div>
       </div>
+    </div>
+  </div>
+
+  <div *ngIf="employees?.length == 0" class="col-lg-12 col-md-12 col-xl-12">
+    <div class="alert alert-info" role="alert">
+      <h4 class="alert-heading">NO EMPLOYEES!</h4>
+      <p>No Employees were found.</p>
+    </div>
   </div>
 
 </body>

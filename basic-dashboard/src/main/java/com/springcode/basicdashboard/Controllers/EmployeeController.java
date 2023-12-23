@@ -38,20 +38,21 @@ public class EmployeeController {
     }
     
     @PostMapping("/")
-    public void enterNewEmployee(@RequestBody Employee employee) {
-        this.employeeServices.registerNewEmployee(employee);
+    public Employee enterNewEmployee(@RequestBody Employee employee) {
+        return this.employeeServices.registerNewEmployee(employee);
     }
 
-    @PostMapping("/dept/{emp_id}/{dept_id}")
-    public void enterDepartmentField(@PathVariable Long emp_id, @PathVariable Long dept_id) {
-        this.employeeServices.setNewDepartment(emp_id, dept_id);
-    }
     
     @PostMapping("/task/{id}")
     public void enterNewTask(@PathVariable Long id, @RequestBody List<Task> tasks) {
         this.employeeServices.addNewTasks(id, tasks);
     }
-
+    
+    @PutMapping("/dept/{emp_id}/{dept_id}")
+    public void enterDepartmentField(@PathVariable Long emp_id, @PathVariable Long dept_id) {
+        this.employeeServices.setNewDepartment(emp_id, dept_id);
+    }
+    
     @PutMapping("/{id}")
     public Employee updateEmployeeProfile(@PathVariable Long id, @RequestBody Employee edit_employee) {
         Employee employee = this.employeeServices.editEmployeeProfile(id, edit_employee);

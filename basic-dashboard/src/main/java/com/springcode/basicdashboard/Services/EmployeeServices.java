@@ -34,8 +34,8 @@ public class EmployeeServices {
         return this.employeeRepository.findById(id);
     }
 
-    public void registerNewEmployee(Employee employee) {
-        this.employeeRepository.save(employee);
+    public Employee registerNewEmployee(Employee employee) {
+        return this.employeeRepository.save(employee);
     }
 
     public void setNewDepartment(Long emp_id, Long dept_id) {
