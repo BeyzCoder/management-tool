@@ -1,7 +1,5 @@
-This project is to train me how to properly create a CRUD method and authentication. The project will consist of a login and register page functionality. Then the user will have two types of account one going to
-have an admin page and an employee page. The admin can see all employees,
-add employees, edit employee's info, delete employee. For the employee's action,
-can see his/her dashboard.
+This project is to train me how to properly create a CRUD method in Spring-Boot Postgress stack. then the functionality are
+add employees, edit employee's info, delete employee, add new task, add new department.
 
 The package project was built on Maven.
 
