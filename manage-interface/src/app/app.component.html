@@ -16,7 +16,10 @@
     <div class="collapse navbar-collapse" id="navbarColor02">
       <ul class="navbar-nav mr-auto">
           <li class="nav-item active">
-            <a class="nav-link" (click)="onOpenModal(null, 'add')">Add Employee <span class="sr-only">(current)</span></a>
+            <a class="nav-link" (click)="onOpenModal(null, 'add')">[Add Employee] <span class="sr-only">(current)</span></a>
+          </li>
+          <li class="nav-item active">
+            <a class="nav-link">[Add Department] <span class="sr-only">(current)</span></a>
           </li>
       </ul>
       <form class="form-inline my-2 my-lg-0">
@@ -37,6 +40,7 @@
                             <h5>{{employee?.name}}</h5>
                             <span>{{employee?.department?.field}}</span>
                         </div>
+                        <a (click)="onOpenModal(employee, 'edit')" class="btn btn-success tooltips" data-placement="top" data-original-title="Edit"><i class="fa fa-tasks"></i> </a>
                         <a (click)="onOpenModal(employee, 'edit')" class="btn btn-primary tooltips" data-placement="top" data-original-title="Edit"><i class="fa fa-pencil"></i> </a>
                         <a (click)="onOpenModal(employee, 'delete')" class="btn btn-secondary tooltips" data-placement="top" data-original-title="Delete"><i class="fa fa-times"></i></a>
                     </div>
@@ -75,8 +79,11 @@
                <input type="email" ngModel name="email" class="form-control" id="email" placeholder="Email" required>
             </div>
             <div class="form-group">
-               <label for="phone">Department</label>
-               <input type="text" ngModel name="department" class="form-control" id="department" placeholder="Department" required>
+              <label for="department">Select a Field: </label>
+  
+              <select id="department" ngModel name="department">
+                <option *ngFor="let department of departments" [ngValue]="department">{{department?.field}}</option>
+              </select>
             </div>
             <div class="modal-footer">
                <button type="button" id="add-employee-form" class="btn btn-secondary" data-dismiss="modal">Close</button>
@@ -108,9 +115,13 @@
                    <label for="email">Email Address</label>
                    <input type="email" ngModel="{{editEmployee?.email}}" name="email" class="form-control" id="email" placeholder="Email">
                 </div>
+
                 <div class="form-group">
-                   <label for="phone">Department Field</label>
-                   <input type="text" ngModel="{{editEmployee?.department}}" name="department" class="form-control" id="department" placeholder="Department">
+                  <label for="department">Select a Field: </label>
+  
+                  <select id="department" ngModel name="department">
+                    <option *ngFor="let department of departments" [ngValue]="department">{{department?.field}}</option>
+                  </select>
                 </div>
                 <div class="modal-footer">
                    <button type="button" id="" data-dismiss="modal" class="btn btn-secondary">Close</button>

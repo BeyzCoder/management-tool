@@ -54,3 +54,19 @@ Thursday, December 21:
 [x] - find a good snippet for our schema.
 
 [x] - Make it able to show it on the angular application.
+
+Friday, December 22:
+[x] - Implement a bootstrap model pop up for the add employee.
+
+[x] - Added edit and delete button to the card-block
+
+[x] - Able to use the data from the database and use that for the frontend.
+
+[x] - Did a model pop up as well for edit and delete
+
+Saturday, December 23:
+[x] - Create a functionality for add, edit, and delete.
+
+[x] - Modify the backend controller route and some model cascade.
+
+[x] - Added new buttons in the html component.

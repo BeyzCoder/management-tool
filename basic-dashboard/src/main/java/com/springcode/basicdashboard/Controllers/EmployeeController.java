@@ -53,10 +53,14 @@ public class EmployeeController {
         this.employeeServices.setNewDepartment(emp_id, dept_id);
     }
     
-    @PutMapping("/{id}")
-    public Employee updateEmployeeProfile(@PathVariable Long id, @RequestBody Employee edit_employee) {
-        Employee employee = this.employeeServices.editEmployeeProfile(id, edit_employee);
-        return employee;
+    @PutMapping("/update")
+    public Employee updateEmployeeProfile(@RequestBody Employee edit_employee) {
+        return this.employeeServices.editEmployeeProfile(edit_employee);
+    }
+
+    @DeleteMapping("/delete/{id}")
+    public void deleteEmployeeProfile(@PathVariable Long id) {
+        this.employeeServices.deleteEmployee(id);
     }
     
     @DeleteMapping("/task/{emp_id}/{task_id}")

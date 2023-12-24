@@ -3,6 +3,7 @@ import { Employee } from './employee';
 import { EmployeeService } from './employee.service';
 import { HttpErrorResponse } from '@angular/common/http';
 import { NgForm } from '@angular/forms';
+import { Department } from './department';
 
 @Component({
   selector: 'app-root',
@@ -11,6 +12,7 @@ import { NgForm } from '@angular/forms';
 })
 export class AppComponent implements OnInit {
   public employees: Employee[] | undefined;
+  public departments: Department[] | undefined;
   public editEmployee: Employee | null | undefined;
   public deleteEmployee: Employee | null | undefined;
   
@@ -18,12 +20,24 @@ export class AppComponent implements OnInit {
 
   ngOnInit() {
     this.getEmployees();
+    this.getDepartments();
   }
 
   public getEmployees(): void {
     this.employeeService.getEmployee().subscribe(
       (response: Employee[]) => {
         this.employees = response;
+      },
+      (error: HttpErrorResponse) => {
+        alert(error.message);
+      }
+    );
+  }
+
+  public getDepartments(): void {
+    this.employeeService.getDepartment().subscribe(
+      (response: Department[]) => {
+        this.departments = response;
       },
       (error: HttpErrorResponse) => {
         alert(error.message);
@@ -45,6 +59,7 @@ export class AppComponent implements OnInit {
       button.setAttribute('data-target', '#updateEmployeeModal');
     }
     if (mode === 'delete') {
+      this.deleteEmployee = employee;
       button.setAttribute('data-target', '#deleteEmployeeModal');
     }
     container?.append(button);
@@ -55,20 +70,38 @@ export class AppComponent implements OnInit {
     document.getElementById('add-employee-form')?.click();
     this.employeeService.addEmployee(addForm.value).subscribe(
       (response: Employee) => {
-        console.log(response);
+        alert(`${response.name} has been added to the system.`);
         this.getEmployees();
+        addForm.reset();
       },  
       (error: HttpErrorResponse) => {
-        alert(error.message)
+        alert(error.message);
+        addForm.reset();
       }
     );
   }
 
   public onUpdateEmployee(employee: Employee): void {
-
+    this.employeeService.updateEmployee(employee).subscribe(
+      (response: Employee) => {
+        alert(`${response.name}'s profile has been changed.`);
+        this.getEmployees();
+      },  
+      (error: HttpErrorResponse) => {
+        alert(error.message);
+      }
+    );
   }
 
-  public onDeleteEmployee(employeeId: number | null | undefined): void {
-
+  public onDeleteEmployee(employeeId: number | undefined): void {
+    this.employeeService.deleteEmployee(employeeId).subscribe(
+      (response: void) => {
+        alert("The account has been deleted.");
+        this.getEmployees();
+      },
+      (error: HttpErrorResponse) => {
+        alert(error.message);
+      }
+    );
   }
 }

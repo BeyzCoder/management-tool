@@ -35,6 +35,10 @@ public class EmployeeServices {
     }
 
     public Employee registerNewEmployee(Employee employee) {
+        Department department = this.departmentRepository.findById(employee.getDepartment().getId()).get();
+
+        employee.setDepartment(department);
+
         return this.employeeRepository.save(employee);
     }
 
@@ -55,12 +59,13 @@ public class EmployeeServices {
         this.taskRepository.saveAll(tasks);
     }
 
-    public Employee editEmployeeProfile(Long id, Employee edit_employee) {
+    public Employee editEmployeeProfile(Employee edit_employee) {
+        return this.employeeRepository.save(edit_employee);
+    }
+
+    public void deleteEmployee(Long id) {
         Employee employee = this.employeeRepository.findById(id).get();
-        employee.setName(edit_employee.getName());
-        employee.setEmail(edit_employee.getEmail());
-        this.employeeRepository.save(employee);
-        return employee;
+        this.employeeRepository.delete(employee);
     }
 
     public void removeOldTask(Long emp_id, Long task_id) {
