@@ -44,8 +44,8 @@ public class EmployeeController {
 
     
     @PostMapping("/task/{id}")
-    public void enterNewTask(@PathVariable Long id, @RequestBody List<Task> tasks) {
-        this.employeeServices.addNewTasks(id, tasks);
+    public void enterNewTask(@PathVariable Long id, @RequestBody Task task) {
+        this.employeeServices.addNewTask(id, task);
     }
     
     @PutMapping("/dept/{emp_id}/{dept_id}")

@@ -53,10 +53,10 @@ public class EmployeeServices {
         this.employeeRepository.save(employee);
     }
 
-    public void addNewTasks(Long id, List<Task> tasks) {
+    public void addNewTask(Long id, Task task) {
         Employee employee = this.employeeRepository.getReferenceById(id);
-        employee.setTasks(tasks);
-        this.taskRepository.saveAll(tasks);
+        employee.addTask(task);
+        this.taskRepository.save(task);
     }
 
     public Employee editEmployeeProfile(Employee edit_employee) {

@@ -33,7 +33,7 @@ public class Employee {
     @JoinColumn(name = "department_id", referencedColumnName = "id")
     private Department department;
 
-    @OneToMany(mappedBy = "currentWorker")
+    @OneToMany(mappedBy = "currentWorker", cascade = CascadeType.REMOVE)
     private List<Task> tasks;
     
     public Employee() {

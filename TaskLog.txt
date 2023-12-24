@@ -70,3 +70,10 @@ Saturday, December 23:
 [x] - Modify the backend controller route and some model cascade.
 
 [x] - Added new buttons in the html component.
+
+Sunday, December 24:
+[x] - Finish the add task button functionality.
+
+[x] - Added department field add.
+
+[x] - Added search employee and department key.

@@ -29,7 +29,7 @@ public class DepartmentController {
     }
     
     @PostMapping("/")
-    public void enterDepartmentField(@RequestBody Department department) {
-        this.departmentServices.registerNewField(department);
+    public Department enterDepartmentField(@RequestBody Department department) {
+        return this.departmentServices.registerNewField(department);
     }
 }

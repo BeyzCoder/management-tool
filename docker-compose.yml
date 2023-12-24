@@ -27,4 +27,6 @@ services:
       - E:\Documents\Project\fcc-project\manage-interface:/usr/src/app
     ports:
       - "4200:4200"
+    depends_on:
+      - basic-dashboard
     restart: always

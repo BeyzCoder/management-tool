@@ -20,7 +20,7 @@ public class DepartmentServices {
         return this.departmentRepository.findAll();
     }
 
-    public void registerNewField(Department department) {
-        this.departmentRepository.save(department);
+    public Department registerNewField(Department department) {
+        return this.departmentRepository.save(department);
     }
 }
